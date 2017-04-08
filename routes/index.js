@@ -8,8 +8,17 @@ router.get('/', function(req, res, next) {
 router.get('/More',function (req,res,next) {
     res.render('More');
 });
+<<<<<<< HEAD
 router.get('/classify',function (req,res,next) {
     res.render('classify');
 });
 
+=======
+router.get('/singlePage',function (req,res,next) {
+    res.render('singlePage');
+});
+router.get('/classify',function (req,res,next) {
+    res.render('classify');
+});
+>>>>>>> shixiaoxiao
 module.exports = router;
