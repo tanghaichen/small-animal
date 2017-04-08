@@ -1,0 +1,55 @@
+<title>文章列表</title>
+<%- include('public-aside') %>
+
+
+
+
+<div class="bottom-boder row">
+	<div class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1">序号</div>
+	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">标题</div>
+	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">分类</div>
+	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">概括</div>
+	<div class="text-center col-lg-3 col-md-3 col-sm-3 col-xs-3">操作</div>
+</div>
+<div id="divdiv">
+	<% for(var i=0;i<arts.length;i++){ %>
+	<div class="bottom-boder row text-left">
+		<div class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1"><%= i+1 %></div>
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ><a href="/indexart?_id=<%= arts[i]._id %>"><%= arts[i].title %></a></div>
+		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" ><a href="/indextags?tag=<%= arts[i].tag %>"><%= arts[i].tag %></a></div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ><%= arts[i].message %></div>
+		<div class="text-center col-lg-3 col-md-3 col-sm-3 col-xs-3">
+			<a href="/arts/artssub?_id=<%= arts[i]._id %>">修改</a>&nbsp;<a href="javascript:;" delId="<%= arts[i]._id %>" delarts="<%= arts[i].title %>">删除</a>
+		</div>
+	</div>
+	<% } %>
+</div>
+<div class="page" id="page">
+	<span>FIRST</span>
+	<span>PREV</span>
+	<ul class="pageNum" id="pageNum">
+<!-- 		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li> -->
+	</ul>
+	<span>NEXT</span>
+	<span>LAST</span>
+	<input type="text" id="numInp" value=""/>
+</div>
+
+
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

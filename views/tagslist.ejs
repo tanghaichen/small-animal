@@ -1,0 +1,32 @@
+<title>标签列表</title>
+<%- include('public-aside') %>
+
+
+
+<div class="bottom-boder row">
+	<div class="text-center col-lg-1 col-md-2 col-sm-2 col-xs-2">序号</div>
+	<div class="col-lg-8 col-md-7 col-sm-7 col-xs-7">标签名称</div>
+	<div class="text-center col-lg-3 col-md-3 col-sm-3 col-xs-3">操作</div>
+</div>
+<% for(var i=0;i<tags.length;i++){ %>
+<div class="bottom-boder row">
+	<div class="text-center col-lg-1 col-md-2 col-sm-2 col-xs-2"><%= i+1 %></div>
+	<div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" ><a href="/indextags?tag=<%= tags[i].tag %>"><%= tags[i].tag %></a></div>
+	<div class="text-center col-lg-3 col-md-3 col-sm-3 col-xs-3">
+		<a href="/tags/tagssub?_id=<%= tags[i]._id %>">修改</a>&nbsp;<a href="javascript:;" delId="<%= tags[i]._id %>" deltags="<%= tags[i].tag %>">删除</a>
+	</div>
+</div>
+<% } %>
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

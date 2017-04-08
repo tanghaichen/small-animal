@@ -1,0 +1,52 @@
+<title>文章增加</title>
+<%- include('public-aside') %>
+
+
+
+<form action="" method="post" >
+	<div>
+		<label>标题:</label>
+		<p>
+			<input type="text" name="title" class="title">
+		</p>
+	</div>
+	<div>
+		<label>分类:</label>
+		<p>
+			<select name="tag" class="tag">
+			<% for(var i=0;i<tags.length;i++){ %>
+				<option value="<%= tags[i].tag %>"><%= tags[i].tag %></option>
+				<% } %>
+			</select>
+		</p>
+	</div>
+	<div>
+		<label>内容:</label>
+		<p>
+			<textarea name="content" cols="100" rows="9" class="content"></textarea>
+		</p>
+	</div>
+	<div>
+		<label>概述:</label>
+		<p>
+			<textarea value="" name="message"  cols="100" rows="2" class="message"></textarea>
+		</p>
+	</div>
+	<div class="submit" id="submit">提交</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
