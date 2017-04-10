@@ -4,6 +4,7 @@ body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,dl,dt,dd,input,pre,img{
 }
 body{
     font: 14px/150% 'Microsoft YaHei', '微软雅黑', '宋体', Arial, Helvetica, sans-serif;
+    min-width:775px;
 }
 ul,ol{
     list-style: none;
@@ -35,13 +36,22 @@ b,strong{
     zoom: 1;
 }
 .headerLogo {
+    margin-top:50px;
     height: 113px;
     span{
         line-height: 113px;
     }
-}
-.headerLogo a{
+    a{
     display: block;
+}
+}
+.houtai{
+    margin-top: 0;
+}
+.liubai{
+    height:20px;
+    width: 100%;
+     background: #1d602c;
 }
 .navBg{
     background: #1d602c;
@@ -55,7 +65,12 @@ b,strong{
 }
 .navBg .collapse .navbar-nav .navFont{
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
+}
+@media(max-width:992px) {
+.navBg .collapse .navbar-nav .navFont{
+    font-size:14px;
+}
 }
 .navBg .collapse .navbar-nav .navFont:hover{
     background: #3f9741;
@@ -63,8 +78,6 @@ b,strong{
 .navIpt input{
     border: none;
     float: left;
-    /*padding: 5px;*/
-    /*box-sizing: border-box;*/
 }
 .navIpt input[type=text]{
     padding: 2px;
@@ -99,4 +112,55 @@ b,strong{
 .footer_title ul li a{
     color: #000;
     font-size: 16px;
+}
+
+.inheader {
+    width: 100%;
+    position: fixed;
+    z-index: 99999;
+}
+
+
+@border:1px solid black;
+
+.aside-content {
+    div {
+        .aside-left {
+            div {
+                padding-left:30px;
+                margin-top:10px;
+                min-height: 200px;
+                a {
+                    font-size: 18px;
+                    display: block;
+                }
+                div {
+                    background: #fff;
+                }
+            }
+        }
+        .aside-h3{
+            margin-top:30px;
+            margin-bottom: 30px;
+        }
+    }
+    .aside-right {
+        /*border: @border;*/
+        height:30px;
+        margin-top:20px;
+    }
+
+}
+.bottom-boder{
+    min-height:30px;
+    line-height: 30px;
+    margin-left: 5px;
+    border-bottom:@border;
+}
+.d9edf6{
+    background: #d9edf6;
+}
+.white{
+    padding-left:10%;
+    background: white;
 }

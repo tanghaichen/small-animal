@@ -1,0 +1,55 @@
+<title>标签列表</title>
+<%- include('public-aside') %>
+
+
+
+<div class="bottom-boder row">
+	<div class="text-center col-lg-1 col-md-2 col-sm-2 col-xs-2">序号</div>
+	<div class="col-lg-8 col-md-7 col-sm-7 col-xs-7">标签名称</div>
+	<div class="text-center col-lg-3 col-md-3 col-sm-3 col-xs-3">操作</div>
+</div>
+<div id="target">
+	<% for(var i=0;i<tags.length;i++){ %>
+	<div class="bottom-boder row">
+		<div class="text-center col-lg-1 col-md-2 col-sm-2 col-xs-2"><%= i+1 %></div>
+		<div class="col-lg-8 col-md-7 col-sm-7 col-xs-7" ><a href="/classify?tag=<%= tags[i].tag %>"><%= tags[i].tag %></a></div>
+		<div class="text-center col-lg-3 col-md-3 col-sm-3 col-xs-3">
+			<a href="/back/tagsrem?_id=<%= tags[i]._id %>">修改</a>&nbsp;<a href="javascript:;" delId="<%= tags[i]._id %>" deltags="<%= tags[i].tag %>">删除</a>
+		</div>
+	</div>
+	<% } %>
+</div>
+
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+<script>
+var tar=document.getElementById('target');
+tar.onclick=function(e){
+var e=e||windwo.event;
+var tar=e.target||e.scrElement,
+tarTag=tar.tagName.toUpperCase(),
+delarts=tar.getAttribute('delarts'),
+delId=tar.getAttribute('delId');
+if(tarTag==='A'&&tar.innerHTML==='删除'){
+	var flag=window.confirm('你确定要删除['+delarts+']标签吗？');
+	if(flag){
+		var xhr=new XMLHttpRequest();
+		xhr.open('get','/back/tagsdelete?_id='+delId,true);
+		xhr.send(null);
+		setTimeout(function(){
+		window.location.href=window.location.href;
+		},50)
+	}
+}
+}
+</script>
+</body>
+</html>

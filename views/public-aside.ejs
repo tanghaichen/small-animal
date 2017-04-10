@@ -5,27 +5,33 @@
 	<title>public-aside</title>
 	<link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
 	<link rel="stylesheet" href="/stylesheets/public.css">
+	<link rel="stylesheet" href="/stylesheets/back.css">
 	<script src="/javascripts/jquery-1.11.1.js"></script>
 	<script src="/javascripts/bootstrap.min.js"></script>
 </head>
-<body>
-	<div class="container">
+<body class="d9edf6">
+	<div class="container-fluid white">
 		<div class="row">
-			<h1 class="headerLogo"><a href=""><img src="http://csapa.chongaibao.com/r/cms/csapa/default/images/logo.jpg" alt="">&nbsp;<span>后台管理系统</span></a></h1>
+			<h1 class="headerLogo houtai"><a href=""><img src="http://csapa.chongaibao.com/r/cms/csapa/default/images/logo.jpg" alt="">&nbsp;<span>后台管理系统</span></a></h1>
 		</div>
+	</div>
+	<div class="container aside-content">
 		<div class="row">
-			<hr>
-			<div class="col-lg-3 ">
+			<div style="margin-top:15px" class="aside-left col-lg-3 col-md-3 col-sm-3 col-xs-3">
 				<div class="row">
-					<div class="col-lg-11 aisde-aside" >
-						
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-pull-1 col-md-pull-1 col-sm-pull-1 col-xs-pull-1">
+						<h3 class="aside-h3">文章管理</h3>
+						<a href="/">首页</a>
+						<a href="/back/artslist">文章列表</a>
+						<a href="/back/artsadd">增加文章</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-lg-pull-1 col-md-pull-1 col-sm-pull-1 col-xs-pull-1">
+						<h3 class="aside-h3">标签管理</h3>
+						<a href="/back/tagslist">标签列表</a>
+						<a href="/back/tagsadd">增加标签</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-9 aside-content">
-
-			</div>
-		</div>
-	</div>
-</body>
-</html>
+			<div id="tagslist" class="aside-right col-lg-9 col-md-9 col-sm-9 col-xs-9">
