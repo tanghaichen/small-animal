@@ -1,0 +1,37 @@
+<title>标签增加</title>
+<%- include('public-aside') %>
+
+
+<form style="padding-top:30px" action="" method="post" >
+	<input type="text" name="tag" id="bbb" value="<%= tag[0].tag %>">
+	<div class="submit" id="submit">提交</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+	</div>
+	<script>
+    var submit=document.getElementById('submit')
+    submit.onclick=function(){
+        var xhr=new XMLHttpRequest;
+        var ipt=document.getElementsByTagName('input')
+        var data='tag='+ipt[0].value;
+        xhr.open('post','/back/tagsupdate?_id='+'<%= tag[0]._id %>',true);
+        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xhr.send(data);
+        setTimeout(function(){
+        window.location.href='/back/tagslist'
+        },50)
+    }
+	</script>
+</body>
+</html>

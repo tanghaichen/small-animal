@@ -19,5 +19,17 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		var submit=document.getElementById('submit');
+		submit.onclick=function(){
+			var inps=document.getElementsByTagName('input');
+			var data = 'tag='+inps[0].value;
+			var xhr=new XMLHttpRequest;
+			xhr.open('post','/back/tagsadd',true);
+			xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+			xhr.send(data);
+			window.location.href='/back/tagslist'
+		}
+	</script>
 </body>
 </html>

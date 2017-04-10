@@ -15,11 +15,11 @@
 	<% for(var i=0;i<arts.length;i++){ %>
 	<div class="bottom-boder row text-left">
 		<div class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1"><%= i+1 %></div>
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ><a href="/indexart?_id=<%= arts[i]._id %>"><%= arts[i].title %></a></div>
-		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" ><a href="/indextags?tag=<%= arts[i].tag %>"><%= arts[i].tag %></a></div>
+		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ><a href="/singlePage?_id=<%= arts[i]._id %>"><%= arts[i].title %></a></div>
+		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" ><a href="/classify?tag=<%= arts[i].tag %>"><%= arts[i].tag %></a></div>
 		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ><%= arts[i].message %></div>
 		<div class="text-center col-lg-3 col-md-3 col-sm-3 col-xs-3">
-			<a href="/arts/artssub?_id=<%= arts[i]._id %>">修改</a>&nbsp;<a href="javascript:;" delId="<%= arts[i]._id %>" delarts="<%= arts[i].title %>">删除</a>
+			<a href="/back/artsrem?_id=<%= arts[i]._id %>">修改</a>&nbsp;<a href="javascript:;" delId="<%= arts[i]._id %>" delarts="<%= arts[i].title %>">删除</a>
 		</div>
 	</div>
 	<% } %>
@@ -51,5 +51,26 @@
 			</div>
 		</div>
 	</div>
+<script>
+	var oDiv=document.getElementById('divdiv');
+	oDiv.onclick=function(e){
+		e=e||window.event;
+		var tar=e.target||e.srcElement,
+		tarTag=tar.tagName.toUpperCase();
+		var delarts=tar.getAttribute('delarts');
+		var delId=tar.getAttribute('delId');
+		if(tarTag==='A'&&tar.innerHTML==='删除'){
+			var flag=window.confirm('你确定要删除标题为['+delarts+']的文章吗');
+			if(flag){
+				var xhr=new XMLHttpRequest();
+				xhr.open('get','/back/artsdelete?_id='+delId,true);
+				xhr.send(null);
+				setTimeout(function(){
+				window.location.href=window.location.href;
+				},50)
+			}
+		}
+	}
+</script>
 </body>
 </html>
