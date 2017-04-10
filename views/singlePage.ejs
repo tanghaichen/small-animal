@@ -6,7 +6,7 @@
             <div class="more-title">
                 <a href="/">首页</a>>
                 <a href="/More">新闻中心</a>>
-                <a href="/classify?_id=<%= art[0].tag %>">分类</a>>
+                <a href="/classify?tag=<%= art[0].tag %>">分类</a>>
                 <a href="#">
                     <strong><%= art[0].title %></strong>
                 </a>
@@ -22,6 +22,7 @@
                  <%- art[0].content %>
              </div>
         </div>
+    <%- include('public-pre') %>
     </div>
 </div>
 <%- include('public-footer') %>

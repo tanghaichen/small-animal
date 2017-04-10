@@ -25,7 +25,9 @@ router.get('/', function(req, res, next) {
 router.get('/More', function(req, res, next) {
     arts.find({}).toArray(function(err, data) {
         if (!err) {
-            res.render('More', { arts: data });
+            tags.find({}).toArray(function(err,tags){
+            res.render('More', { arts: data ,tags:tags});
+            })
         }
     })
 });
@@ -33,14 +35,18 @@ router.get('/More', function(req, res, next) {
 //分类(展示某一类文章)
 router.get('/classify', function(req, res, next) {
     arts.find({ tag: req.query.tag }).toArray(function(err, data) {
-        res.render('classify', { arts: data })
+        tags.find({}).toArray(function(err,tags){
+        res.render('classify', { arts: data ,tags:tags})
+        })
     })
 });
 
 //单篇(展示单个文章)
 router.get('/singlePage', function(req, res, next) {
     arts.find({ _id: ObjectId(req.query._id) }).toArray(function(err, data) {
-        res.render('singlePage', { art: data })
+        tags.find({}).toArray(function(err,tags){
+        res.render('singlePage', { art: data ,tags:tags})
+        })
     })
 })
 

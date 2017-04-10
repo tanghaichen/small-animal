@@ -6,20 +6,20 @@
 
 <div class="bottom-boder row">
 	<div class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1">序号</div>
-	<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">标题</div>
-	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">分类</div>
+	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">标题</div>
+	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">分类</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">概括</div>
 	<div class="text-center col-lg-3 col-md-3 col-sm-3 col-xs-3">操作</div>
 </div>
-<div id="divdiv">
-	<% for(var i=0;i<arts.length;i++){ %>
+<div id="divdiv" >
+	<% for(var i=0;i<db.length;i++){ %>
 	<div class="bottom-boder row text-left">
 		<div class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1"><%= i+1 %></div>
-		<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ><a href="/singlePage?_id=<%= arts[i]._id %>"><%= arts[i].title %></a></div>
-		<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1" ><a href="/classify?tag=<%= arts[i].tag %>"><%= arts[i].tag %></a></div>
-		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ><%= arts[i].message %></div>
+		<div id="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" ><a href="/singlePage?_id=<%= db[i]._id %>"><%= db[i].title %></a></div>
+		<div id="tag" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" ><a href="/classify?tag=<%= db[i].tag %>"><%= db[i].tag %></a></div>
+		<div id="message" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ><%= db[i].message %></div>
 		<div class="text-center col-lg-3 col-md-3 col-sm-3 col-xs-3">
-			<a href="/back/artsrem?_id=<%= arts[i]._id %>">修改</a>&nbsp;<a href="javascript:;" delId="<%= arts[i]._id %>" delarts="<%= arts[i].title %>">删除</a>
+			<a href="/back/dbrem?_id=<%= db[i]._id %>">修改</a>&nbsp;<a href="javascript:;" delId="<%= db[i]._id %>" deldb="<%= db[i].title %>">删除</a>
 		</div>
 	</div>
 	<% } %>
@@ -28,6 +28,10 @@
 	<span>FIRST</span>
 	<span>PREV</span>
 	<ul class="pageNum" id="pageNum">
+	<% for(var i=0;i<arts.length/5;i++){ %>
+	<li><%= i+1 %></li>
+	<% } %>
+	<!-- <li>1</li> -->
 <!-- 		<li>1</li>
 		<li>2</li>
 		<li>3</li>
@@ -46,11 +50,168 @@
 
 
 
-
-
 			</div>
 		</div>
 	</div>
+	<script>
+	var n=1,total=0;
+	var ipt=document.getElementById('numInp');
+		ipt.value=n
+	var title=document.getElementById('title');
+	var tag=document.getElementById('tag');
+	var message=document.getElementById('message');
+	var con=document.getElementById('divdiv');
+	window.onload=function(){
+		pa()
+	}
+	var pa=function(){
+		var xhr=new XMLHttpRequest;
+		xhr.open('get','/back/bbb/'+n,true);
+		 xhr.onreadystatechange = function () {
+		 	if (xhr.readyState === 4) {
+		 		 var val = xhr.responseText;
+		 		 val=JSON.parse(val);
+		 		var data=val["data"]
+                total=val["total"]
+		 		var str='';
+		 		console.log(data.length)
+		 		for(var i=0;i<data.length;i++){
+		 			var db=data[i];
+		 			// console.log(db)
+		 			str+=`<div  class="bottom-boder row text-left">
+ <div class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1"> ${i+1} </div>
+ <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" ><a href="/singlePage?_id=<%= db[i]._id %>">${db.title}</a></div>
+ <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" ><a href="/classify?tag=<%= db[i].tag %>">${db.tag}</a></div>
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" >${db.message}</div>
+		<div class="text-center col-lg-3 col-md-3 col-sm-3 col-xs-3">
+			<a href="/back/artsrem?_id=<%= db[i]._id %>">修改</a>&nbsp;<a href="javascript:;" delId="<%= db[i]._id %>" deldb="<%= db[i].title %>">删除</a>
+		</div>
+		 			</div>`
+		 			// var qqq=data[i]
+		 			// console.log(qqq["title"])
+		 		}
+		 		con.innerHTML=str;
+		 	}
+		 }
+		xhr.send(n)
+	}
+
+	var page=document.getElementById('page');
+	page.onclick=function(e){
+		var e=e||window.event,
+		tar=e.target||e.srcElement,
+		tarTag=tar.tagName.toUpperCase(),
+		tarInn=tar.innerHTML;
+		if(tarTag==='SPAN'){
+			if(tarInn==='NEXT'){
+				if (n === total) {
+					return;
+				}
+				n++;
+			}
+			if(tarInn==='PREV'){
+				if(n===1){
+					return;
+				}
+				n--;
+			}
+			if(tarInn==='FIRST'){
+				n=1;
+			}
+			if(tarInn==='LAST'){
+				 if (n === total) {
+                            return;
+                        }
+				n=total;
+			}
+
+
+			pa();
+		}
+		if(tarTag==='LI'){
+
+			if (n == tarInn) {
+				return;
+			}
+			n = parseFloat(tarInn);
+
+		}
+		if (tarTag === "INPUT") {
+			return;
+		}
+		pa()
+		ipt.value=n
+	}
+	            numInp.onkeyup = function (e) {
+                e = e || window.event;
+                if (e.keyCode === 13) {//->ENTER
+                    var val = parseFloat(this.value.replace(/^ +| +$/, ""));
+                    if (isNaN(val)) {
+                        //->非有效数字
+                        this.value = n;
+                        return;
+                    }
+
+                    val = Math.round(val);
+                    if (val < 1) {
+                        n = 1;
+                    } else if (val > total) {
+                        n = total;
+                    } else {
+                        n = val;
+                    }
+
+                    pa();
+                }
+            };
+	</script>
+<script>
+// 	var n=1;
+// 	var ipt=document.getElementById('numInp');
+// 	window.onload=function(){
+// 	
+// 	
+// 	
+// 			 			str+=`<div  class="bottom-boder row text-left">
+ // <div class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1"><%= i+1 %></div>
+ // <div id="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" ><a href="/singlePage?_id=<%= db[i]._id %>"><%= db[i].title %></a></div>
+ // <div id="tag" class="col-lg-2 col-md-2 col-sm-2 col-xs-2" ><a href="/classify?tag=<%= db[i].tag %>"><%= db[i].tag %></a></div>
+	// 	<div id="message" class="col-lg-4 col-md-4 col-sm-4 col-xs-4" ><%= db[i].message %></div>
+	// 	<div class="text-center col-lg-3 col-md-3 col-sm-3 col-xs-3">
+	// 		<a href="/back/dbrem?_id=<%= db[i]._id %>">修改</a>&nbsp;<a href="javascript:;" delId="<%= db[i]._id %>" deldb="<%= db[i].title %>}">删除</a>
+	// 	</div>
+
+	// 	 			</div>`
+// 	
+// 	
+// 	// function(){
+// 		ipt.value=n;
+// 		var xhr=new XMLHttpRequest;
+// 		xhr.open('get','/back/bbb/'+n,true);
+// 		// console.log(n)
+// 		 xhr.onreadystatechange = function () {
+// 		 	if (xhr.readyState === 4) {
+// // console.log(JSON.parse(data))
+// 		 	}
+// 		 }
+// 		xhr.send(n)
+// 		return n;
+// 	}
+// 	var page=document.getElementById('page');
+// 	page.onclick=function(e){
+// 		var e=e||window.event,
+// 		tar=e.target||e.srcElement,
+// 		tarTag=tar.tagName.toUpperCase();
+// 		if(tarTag==='SPAN'&&tar.innerHTML==='NEXT'){
+// 			n++;
+// 			console.log(n)
+// 			pa()
+// 			// console.log(n)
+// 		// window.location.href='/back/artslist/'+n;
+
+// 		}
+// 	}
+</script>
 <script>
 	var oDiv=document.getElementById('divdiv');
 	oDiv.onclick=function(e){

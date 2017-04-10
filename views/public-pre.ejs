@@ -1,0 +1,6 @@
+      <div class=" col-sm-12 col-md-11 col-lg-2  mainbor boright">
+            <h3>分类目录</h3>
+            <% for(var i=0;i<tags.length;i++){ %>
+            <p><a href="/classify?tag=<%= tags[i].tag %>"><%= tags[i].tag %></a></p>
+            <%}%>
+        </div>

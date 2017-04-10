@@ -19,14 +19,32 @@ router.get('/', function(req, res, next) {
 
 
 //展示文章列表
+router.get('/bbb/:msg', function(req, res, next) {
+    arts.find({}).toArray(function(err, data) {
+        n = req.params.msg
+        console.log(n)
+        arts.find({}).skip((n - 1) * 5).limit(5).toArray(function(err, db) {
+            if (!err) {
+
+                res.writeHead(200, { 'content-type': 'application/json' + ';charset=utf-8' });
+                res.end(JSON.stringify({
+                    data: db,
+                    total:Math.ceil(data.length/5)
+                }));
+            }
+        })
+    })
+});
+
 router.get('/artslist', function(req, res, next) {
     arts.find({}).toArray(function(err, data) {
-        if (!err) {
-            res.render('artslist', { arts: data })
-        }
-    })
-})
+        n = 1
+        arts.find({}).skip((n - 1) * 5).limit(5).toArray(function(err, db) {
+            res.render('artslist', { arts: data, db: db })
 
+        })
+    })
+});
 //增加文章
 //-->1.打开增加文章页面
 router.get('/artsadd', function(req, res, next) {
@@ -49,7 +67,8 @@ router.get('/artsrem', function(req, res, next) {
             res.render('artsrem', { arts: arts, tags: tags })
         })
     })
-})
+});
+
 router.post('/artsrem', function(req, res, next) {
     arts.findOneAndUpdate({ _id: ObjectId(req.query._id) }, req.body, function(err, data) {
 
@@ -92,7 +111,7 @@ router.get('/tagsrem', function(req, res, next) {
             res.render('tagsrem', { tag: data })
         }
     })
-})
+});
 router.post('/tagsupdate', function(req, res, next) {
     // console.log(req.body)
     tags.findOneAndUpdate({ _id: ObjectId(req.query._id) }, req.body, function(err, data) {
